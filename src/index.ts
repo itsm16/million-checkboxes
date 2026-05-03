@@ -10,12 +10,65 @@ import jose from 'node-jose'
 import type { JWTClaims } from './utils/user-token.js'
 import { Server } from 'socket.io'
 import http from "node:http"
+import { publisher, subscriber } from './config/redis-config.js'
+import cookieParser from 'cookie-parser'
 
 const PORT = process.env.PORT ?? 8080
 
 const app = express()
+app.use(express.json())
+app.use(cookieParser())
+
 const server = http.createServer(app)
 const io = new Server(server)
+
+type updateData = {
+  id: string;
+  check: boolean
+}
+
+// Authentication middleware
+const requireAuth = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  const token = req.cookies.auth_token;
+  
+  if (!token) {
+    return res.redirect('/o/authenticate');
+  }
+
+  try {
+    const decoded = JWT.verify(token, PUBLIC_KEY, { algorithms: ['RS256'] }) as JWTClaims;
+
+    if(!decoded){
+      res.status(401).json({
+        message: "Unauthorized"
+      })
+    }
+
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.clearCookie('auth_token');
+    return res.redirect('/o/authenticate');
+  }
+};
+
+// Extend Request type to include user
+declare global {
+  namespace Express {
+    interface Request {
+      user?: JWTClaims;
+    }
+  }
+}
+
+// redis sub
+await subscriber.subscribe("internal-server:check-update")
+subscriber.on("message", (channel, data)=>{
+  if(channel === "internal-server:check-update"){
+    const parsed : updateData = JSON.parse(data)
+    io.emit("server:check-update", JSON.parse(data))
+  }
+})
 
 // In-memory storage for checkbox states
 const checkboxStates = new Set<string>()
@@ -24,11 +77,11 @@ const checkboxStates = new Set<string>()
 io.on("connection", (socket)=>{
   console.log("socket io runs")
 
-  socket.on("client:check-update", (data)=>{
+  socket.on("client:check-update", async (data)=>{
     console.log(data)
-    checkboxStates.add(data.id)
-    console.log(checkboxStates)
-    io.emit("server:check-update", data)
+    // checkboxStates.add(data.id)
+    // console.log(checkboxStates)
+    await publisher.publish("internal-server:check-update", JSON.stringify(data))
   })
 })
 
@@ -40,6 +93,17 @@ app.get("/api/checkboxes", (req, res)=>{
         checked: Array.from(checkboxStates)
     })
 })
+
+// Get user info endpoint
+app.get("/api/user-info", requireAuth, (req, res) => {
+  res.json({
+    user: {
+      name: req.user?.name,
+      email: req.user?.email,
+      sub: req.user?.sub
+    }
+  });
+});
 
 // 
 app.get("/health", (req, res)=>{
@@ -72,13 +136,17 @@ app.get("/well-known/jwks.json", async (req, res)=>{
   res.json({keys : [key.toJSON()]})
 })
 
+app.get("/sign-up", (req, res)=>{
+  res.sendFile(path.resolve("public", "sign-up.html"))
+})
+
 // auth
 app.get("/o/authenticate", (req, res)=>{
   res.sendFile(path.resolve("public", "authenticate.html"))
 })
 
 // checkboxes
-app.get("/checkboxes", (req, res)=>{
+app.get("/checkboxes", requireAuth, (req, res)=>{
   res.sendFile(path.resolve("public", "checkboxes.html"))
 })
 
@@ -129,7 +197,14 @@ app.post("/o/authenticate/sign-in", async (req, res) => {
 
   const token = JWT.sign(claims, PRIVATE_KEY, { algorithm: "RS256" });
 
-  res.json({ token });
+  res.cookie('auth_token', token, {
+    httpOnly: true,
+    secure: false, // Set to true in production with HTTPS
+    maxAge: 3600 * 1000, // 1 hour
+    sameSite: 'lax'
+  });
+
+  res.json({ message: "Authenticated successfully" });
 });
 
 app.post("/o/authenticate/sign-up", async (req, res) => {

@@ -169,9 +169,29 @@
             }
         }
 
+        // Check authentication status
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/user-info')
+                if (!response.ok) {
+                    window.location.href = '/o/authenticate'
+                    return false
+                }
+                return true
+            } catch (error) {
+                console.error('Auth check failed:', error)
+                window.location.href = '/o/authenticate'
+                return false
+            }
+        }
+
         // Initialize
-        fetchInitialStates().then(() => {
-            loadMoreCheckboxes()
+        checkAuth().then(isAuthenticated => {
+            if (isAuthenticated) {
+                fetchInitialStates().then(() => {
+                    loadMoreCheckboxes()
+                })
+            }
         })
     </script>
 </body>

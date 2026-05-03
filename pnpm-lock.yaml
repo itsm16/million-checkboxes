@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      cookie-parser:
+        specifier: ^1.4.7
+        version: 1.4.7
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -17,6 +20,9 @@ importers:
       express:
         specifier: ^5.2.1
         version: 5.2.1
+      ioredis:
+        specifier: ^5.10.1
+        version: 5.10.1
       jsonwebtoken:
         specifier: ^9.0.3
         version: 9.0.3
@@ -33,6 +39,9 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0(typescript@6.0.3)
     devDependencies:
+      '@types/cookie-parser':
+        specifier: ^1.4.10
+        version: 1.4.10(@types/express@5.0.6)
       '@types/express':
         specifier: ^5.0.6
         version: 5.0.6
@@ -512,6 +521,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@ioredis/commands@1.5.1':
+    resolution: {integrity: sha512-JH8ZL/ywcJyR9MmJ5BNqZllXNZQqQbnVZOqpPQqE1vHiFgAw4NHbvE0FOduNU8IX9babitBT46571OnPTT0Zcw==}
+
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
@@ -520,6 +532,11 @@ packages:
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
+
+  '@types/cookie-parser@1.4.10':
+    resolution: {integrity: sha512-B4xqkqfZ8Wek+rCOeRxsjMS9OgvzebEzzLYw7NHYuvzb7IdxOkI0ZHGgeEBX4PUM7QGVvNSK60T3OvWj3YfBRg==}
+    peerDependencies:
+      '@types/express': '*'
 
   '@types/cors@2.8.19':
     resolution: {integrity: sha512-mFNylyeyqN93lfe/9CSxOGREz8cpzAhH+E93xJ4xWQf62V8sQ/24reV2nyzUWM6H6Xji+GGHpkbLe7pVoUEskg==}
@@ -607,6 +624,10 @@ packages:
     resolution: {integrity: sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==}
     engines: {node: '>= 0.4'}
 
+  cluster-key-slot@1.1.2:
+    resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
+    engines: {node: '>=0.10.0'}
+
   content-disposition@1.1.0:
     resolution: {integrity: sha512-5jRCH9Z/+DRP7rkvY83B+yGIGX96OYdJmzngqnw2SBSxqCFPd0w2km3s5iawpGX8krnwSGmF0FW5Nhr0Hfai3g==}
     engines: {node: '>=18'}
@@ -614,6 +635,13 @@ packages:
   content-type@1.0.5:
     resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
     engines: {node: '>= 0.6'}
+
+  cookie-parser@1.4.7:
+    resolution: {integrity: sha512-nGUvgXnotP3BsjiLX2ypbQnWoGUPIIfHQNZkkC668ntrzGWEZVW70HDEB1qnNGMicPje6EttlIgzo51YSwNQGw==}
+    engines: {node: '>= 0.8.0'}
+
+  cookie-signature@1.0.6:
+    resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
 
   cookie-signature@1.2.2:
     resolution: {integrity: sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==}
@@ -639,6 +667,10 @@ packages:
     peerDependenciesMeta:
       supports-color:
         optional: true
+
+  denque@2.1.0:
+    resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==}
+    engines: {node: '>=0.10'}
 
   depd@2.0.0:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
@@ -873,6 +905,10 @@ packages:
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
+  ioredis@5.10.1:
+    resolution: {integrity: sha512-HuEDBTI70aYdx1v6U97SbNx9F1+svQKBDo30o0b9fw055LMepzpOOd0Ccg9Q6tbqmBSJaMuY0fB7yw9/vjBYCA==}
+    engines: {node: '>=12.22.0'}
+
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
     engines: {node: '>= 0.10'}
@@ -893,8 +929,14 @@ packages:
   jws@4.0.1:
     resolution: {integrity: sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==}
 
+  lodash.defaults@4.2.0:
+    resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
+
   lodash.includes@4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
+
+  lodash.isarguments@3.1.0:
+    resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
 
   lodash.isboolean@3.0.3:
     resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
@@ -1079,6 +1121,14 @@ packages:
     resolution: {integrity: sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==}
     engines: {node: '>= 0.10'}
 
+  redis-errors@1.2.0:
+    resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
+    engines: {node: '>=4'}
+
+  redis-parser@3.0.0:
+    resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
+    engines: {node: '>=4'}
+
   resolve-pkg-maps@1.0.0:
     resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
 
@@ -1156,6 +1206,9 @@ packages:
 
   split@0.3.3:
     resolution: {integrity: sha512-wD2AeVmxXRBoX44wAycgjVpMhvbwdI2aZjCkvfNcH1YqHQvJVa1duWc73OyVGJUc05fhFaTZeQ/PYsrmyH0JVA==}
+
+  standard-as-callback@2.1.0:
+    resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
 
   statuses@2.0.2:
     resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
@@ -1472,6 +1525,8 @@ snapshots:
   '@esbuild/win32-x64@0.27.7':
     optional: true
 
+  '@ioredis/commands@1.5.1': {}
+
   '@socket.io/component-emitter@3.1.2': {}
 
   '@types/body-parser@1.19.6':
@@ -1482,6 +1537,10 @@ snapshots:
   '@types/connect@3.4.38':
     dependencies:
       '@types/node': 25.6.0
+
+  '@types/cookie-parser@1.4.10(@types/express@5.0.6)':
+    dependencies:
+      '@types/express': 5.0.6
 
   '@types/cors@2.8.19':
     dependencies:
@@ -1591,9 +1650,18 @@ snapshots:
       call-bind-apply-helpers: 1.0.2
       get-intrinsic: 1.3.0
 
+  cluster-key-slot@1.1.2: {}
+
   content-disposition@1.1.0: {}
 
   content-type@1.0.5: {}
+
+  cookie-parser@1.4.7:
+    dependencies:
+      cookie: 0.7.2
+      cookie-signature: 1.0.6
+
+  cookie-signature@1.0.6: {}
 
   cookie-signature@1.2.2: {}
 
@@ -1613,6 +1681,8 @@ snapshots:
   debug@4.4.3:
     dependencies:
       ms: 2.1.3
+
+  denque@2.1.0: {}
 
   depd@2.0.0: {}
 
@@ -1873,6 +1943,20 @@ snapshots:
 
   inherits@2.0.4: {}
 
+  ioredis@5.10.1:
+    dependencies:
+      '@ioredis/commands': 1.5.1
+      cluster-key-slot: 1.1.2
+      debug: 4.4.3
+      denque: 2.1.0
+      lodash.defaults: 4.2.0
+      lodash.isarguments: 3.1.0
+      redis-errors: 1.2.0
+      redis-parser: 3.0.0
+      standard-as-callback: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
+
   ipaddr.js@1.9.1: {}
 
   is-promise@4.0.0: {}
@@ -1903,7 +1987,11 @@ snapshots:
       jwa: 2.0.1
       safe-buffer: 5.2.1
 
+  lodash.defaults@4.2.0: {}
+
   lodash.includes@4.3.0: {}
+
+  lodash.isarguments@3.1.0: {}
 
   lodash.isboolean@3.0.3: {}
 
@@ -2056,6 +2144,12 @@ snapshots:
       iconv-lite: 0.7.2
       unpipe: 1.0.0
 
+  redis-errors@1.2.0: {}
+
+  redis-parser@3.0.0:
+    dependencies:
+      redis-errors: 1.2.0
+
   resolve-pkg-maps@1.0.0: {}
 
   router@2.2.0:
@@ -2177,6 +2271,8 @@ snapshots:
   split@0.3.3:
     dependencies:
       through: 2.3.8
+
+  standard-as-callback@2.1.0: {}
 
   statuses@2.0.2: {}
 

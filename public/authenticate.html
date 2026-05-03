@@ -143,7 +143,7 @@
         </form>
         
         <div class="signup-link">
-            Don't have an account? <a href="/sign-up.html">Sign Up</a>
+            Don't have an account? <a href="/sign-up">Sign Up</a>
         </div>
     </div>
 
@@ -181,6 +181,7 @@
                     successEl.textContent = 'Sign in successful! Token received.';
                     successEl.style.display = 'block';
                     
+                    window.location.href = '/checkboxes'
                     // Store token and redirect or handle as needed
                     // if (result.token) {
                     //     localStorage.setItem('authToken', result.token);
